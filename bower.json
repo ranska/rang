@@ -1,0 +1,22 @@
+{
+  "name": "rang",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ranska/rang",
+  "authors": [
+    "Pierre-Alexandre Piarulli <go@rubyrock.me>"
+  ],
+  "description": "rang give sexy KISS to your angular files",
+  "main": "rang.js.coffee",
+  "keywords": [
+    "angularjs",
+    "coffeescript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
