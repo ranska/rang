@@ -49,6 +49,9 @@ angular.controller('EditCtrl',
 And then the same with rang flavour.
 
 ```coffeescript
+@Myapp = angular.module("myapp", []) 
+  # every class can be write in separated file
+
 class Projects extends ScopeCtrl 
   #rang provide ScopeCtrl with $scope injection 
   #there is also RangCtrl without any injection
@@ -56,11 +59,14 @@ class Projects extends ScopeCtrl
   #inject class methode write string for injection
 
 class List extends Projects
+  @register window.Myapp # add your controller to your app
+  # Note you don't need register parent controller
   projects: @Projects
   # every class methode are authomaticaly added to $scope
   # @Projects is an injection used as an attribute
 
 class CreateCtrl extends Projects
+  @register window.Myapp
   @inject '$location $timeout'
   # you can add many injection in one string # or a string array if you like
 
@@ -71,6 +77,7 @@ class CreateCtrl extends Projects
   # @s is an alias of the long @$scope
 
 class EditCtrl extends ScopeCtrl 
+  @register window.Myapp
   @inject '$location $routeParams $firebase fbURL'
 
   initialize: ->
