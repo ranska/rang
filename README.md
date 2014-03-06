@@ -1,5 +1,7 @@
 # Rang
 
+[![Travis CI   ](http://img.shields.io/travis/ranska/rang/master.svg)](https://travis-ci.org/ranska/rang)
+
 Rang is a set of coffeescript class who help you to make your angular code
 more clean and dry and ready for mimification.
 
@@ -61,8 +63,14 @@ class Projects extends ScopeCtrl
 class List extends Projects
   @register window.Myapp # add your controller to your app
   # Note you don't need register parent controller
-  projects: @Projects
+ 
+  hello: ->
+    'hello'
   # every class methode are authomaticaly added to $scope
+
+  # initialize is call on Ctrl start after injection
+  initialize: ->
+    @s.projects = @Projects
   # @Projects is an injection used as an attribute
 
 class CreateCtrl extends Projects
@@ -82,7 +90,6 @@ class EditCtrl extends ScopeCtrl
 
   initialize: ->
     @projectUrl = @fbURL + @$routeParams.projectId
-  # initialize is call on Ctrl start after injection
 
   project: 
     @$firebase new Firebase(projectUrl)
