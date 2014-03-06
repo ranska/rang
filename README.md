@@ -1,5 +1,7 @@
 # Rang
 
+[![Travis CI   ](http://img.shields.io/travis/ranska/rang/master.svg)](https://travis-ci.org/ranska/rang)
+
 Rang is a set of coffeescript class who help you to make your angular code
 more clean and dry and ready for mimification.
 
