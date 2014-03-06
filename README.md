@@ -61,8 +61,14 @@ class Projects extends ScopeCtrl
 class List extends Projects
   @register window.Myapp # add your controller to your app
   # Note you don't need register parent controller
-  projects: @Projects
+ 
+  hello: ->
+    'hello'
   # every class methode are authomaticaly added to $scope
+
+  # initialize is call on Ctrl start after injection
+  initialize: ->
+    @s.projects = @Projects
   # @Projects is an injection used as an attribute
 
 class CreateCtrl extends Projects
@@ -82,7 +88,6 @@ class EditCtrl extends ScopeCtrl
 
   initialize: ->
     @projectUrl = @fbURL + @$routeParams.projectId
-  # initialize is call on Ctrl start after injection
 
   project: 
     @$firebase new Firebase(projectUrl)
