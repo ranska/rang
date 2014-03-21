@@ -31,3 +31,30 @@ class @RangCtrl extends @Rang
 
 class @ScopeCtrl extends @RangCtrl
   @inject '$scope'
+
+##
+#  Service
+#
+#
+class @RangSrvc
+  @register: (app, name) ->
+    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
+    app.service name, @
+ 
+  @inject: (args...) ->
+    @$inject = args
+ 
+  constructor: (args...) ->
+    for key, index in @constructor.$inject
+      @[key] = args[index]
+ 
+    @initialize?()
+
+class @RestSrvc extends @RangSrvc
+  @inject 'Restangular'
+
+  constructor: (args...) ->
+    super args...
+    @api = @Restangular.one 'api/v1'
+
+
