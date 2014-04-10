@@ -131,6 +131,37 @@ With rang
 You have a more object oriended style and a better convension over config
 approche, what is good when you work in team
 
+### Register
+  @register appname
+  (work in progress 0.1.0)
+  or @register()
+  next version @rang() will register and inject on the same call
+
+### Service
+
+the class @RangSrvc act same as a controller. ie: there regsiter and injection
+but no @s for scope.
+There class @RestSrvc extends @RangSrvc who inject restangular 
+(TODO DOC look the code please) default url for rest api.
+
+### Directive
+
+(TODO 0.2.0 ) default template url base on class name
+
+### Jasmine
+
+TODO 0.3.0) I love the idea that rang should give some class like 
+RangSrvSpec or RangCtrlSpec with all the setup done for you.
+
+### RND
+for the next steps I want to implement callback 
+like rails before_call
+
+Fell free to ask question submit new idea or just express your feeling in issus
+TODO create google groupe.
+
+
+
 
  
 
