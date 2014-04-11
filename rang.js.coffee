@@ -9,10 +9,15 @@ class @Rang
         @$inject.push arg
     else
       @$inject = args
+
+  @conf:
+    app: null
+    app_name: 'rang_app'
  
   constructor: (args...) ->
-    for key, index in @constructor.$inject
-      @[key] = args[index]
+    if @constructor.$inject?
+      for key, index in @constructor.$inject
+        @[key] = args[index]
  
 class @RangCtrl extends @Rang
   @register: (app, name) ->
@@ -38,6 +43,8 @@ class @ScopeCtrl extends @RangCtrl
 #
 class @RangSrvc
   @register: (app, name) ->
+    unless app?
+      app = @conf.app
     name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
     app.service name, @
  
@@ -45,10 +52,16 @@ class @RangSrvc
     @$inject = args
  
   constructor: (args...) ->
-    for key, index in @constructor.$inject
-      @[key] = args[index]
+    if @constructor.$inject?
+      for key, index in @constructor.$inject
+        @[key] = args[index]
  
     @initialize?()
+
+  @conf:
+    app: null
+    app_name: 'rang_'
+
 
 class @RestSrvc extends @RangSrvc
   @inject 'Restangular'
