@@ -1,4 +1,8 @@
 @Bp = angular.module( 'specapp', [])
+class @RangedCtrl extends @ScopeCtrl
+  @register window.Bp
+  scopedFunction: (arg) ->
+    @s.scopedArg = arg
 @RangSrvc.conf.app = @Bp
 class @DefaultSrvc extends @RangSrvc
   @register()
@@ -19,7 +23,7 @@ describe "register:\n", ->
         expect(@DefaultSrvc isnt undefined).toBe true
 
       
-xdescribe "controller:\n", ->
+describe "controller:\n", ->
   $scope = null
   $rootScope = null
  
@@ -42,11 +46,11 @@ xdescribe "controller:\n", ->
       $scope.scopedFunction testedValue
       expect($scope.scopedArg).toBe testedValue
 
-#class @RangedSrvc extends @RangSrvc
-#  @register window.Bp
-#  actionService: (arg) ->
-#    "service #{arg}"
-xdescribe "service:\n", ->
+class @RangedSrvc extends @RangSrvc
+  @register window.Bp
+  actionService: (arg) ->
+    "service #{arg}"
+describe "service:\n", ->
   beforeEach ->
     module 'specapp'
  
