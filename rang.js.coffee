@@ -28,7 +28,6 @@ class RangBase
   @register: (app, name) ->
     app = @conf.app unless app?
     name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
-    #console.log name.match(/[A-Z]*[^A-Z]+/g)[-1..][0]
     switch name.match(/[A-Z]*[^A-Z]+/g)[-1..][0]
       when 'Ctrl'
         app.controller name, @
@@ -68,4 +67,33 @@ class @RestSrv extends @RangSrv
     super args...
     @api = @Restangular.one 'api/v1'
 
+##
+# Directive
+#
+class @RangCtrlDrt extends @Rang
+  @register: (app, name) ->
+    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
+    drtName = name.match(/[A-Z]*[^A-Z]+/g)
+    drtName = drtName[0...drtName.length-2].join ''
+    console.log drtName
+    @conf.app.directive drtName, ->
+      restrict:    "ACE"
+      remplace:    true
+      templateUrl: "/rang_templates/#{drtName}"
+      scope:       false
+      controller:  this
 
+  constructor: (args...) ->
+    super args...
+    @s = @$scope
+    for key, fn of @constructor.prototype
+      continue unless typeof fn is 'function'
+      continue if key in ['constructor', 'initialize'] or key[0] is '_'
+      @s[key] = fn.bind?(@) || _.bind(fn, @)
+ 
+    @initialize?()
+
+class @ScopeCtrlDrt extends @RangCtrlDrt
+  @inject '$scope'
+###
+###
