@@ -132,16 +132,36 @@ You have a more object oriended style and a better convension over config
 approche, what is good when you work in team
 
 ### Register
-  @register appname
-  (work in progress 0.1.0)
-  or @register()
+The basic way is to pass the app as a parameter
+
+```coffeescript
+@App = angular.module( 'app', [])
+
+class @CoolCtrl extends @ScopeCtrl
+  @register window.App
+````
+  
+  You can register without parameter if you configure rang before
+
+```coffeescript
+@App = angular.module( 'app', [])
+
+@Rang.conf.app = @App
+
+class @CoolCtrl extends @ScopeCtrl
+  @register() 
+````
+  
+Register type aka: app.service, app.controller is found by class name
+so you must name your class ended by Ctrl, Srv (Todo Fac)  
+
   next version @rang() will register and inject on the same call
 
 ### Service
 
-the class @RangSrvc act same as a controller. ie: there regsiter and injection
+the class @RangSrv act same as a controller. ie: there regsiter and injection
 but no @s for scope.
-There class @RestSrvc extends @RangSrvc who inject restangular 
+There class @RestSrv extends @RangSrv who inject restangular 
 (TODO DOC look the code please) default url for rest api.
 
 ### Directive

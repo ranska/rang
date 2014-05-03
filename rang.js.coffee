@@ -9,15 +9,34 @@ class @Rang
         @$inject.push arg
     else
       @$inject = args
+
+  @conf:
+    app: null
  
   constructor: (args...) ->
-    for key, index in @constructor.$inject
-      @[key] = args[index]
- 
-class @RangCtrl extends @Rang
+    if @constructor.$inject?
+      for key, index in @constructor.$inject
+        @[key] = args[index]
+
+##
+#  Base is now used as mixin for shearing
+#  register between ctrl srv 
+#  but not drt (directive aren't register)
+#  TODO find a way to factorize the 2 first line
+#
+class RangBase
   @register: (app, name) ->
+    app = @conf.app unless app?
     name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
-    app.controller name, @
+    #console.log name.match(/[A-Z]*[^A-Z]+/g)[-1..][0]
+    switch name.match(/[A-Z]*[^A-Z]+/g)[-1..][0]
+      when 'Ctrl'
+        app.controller name, @
+      when 'Srv'
+        app.service name, @
+
+class @RangCtrl extends @Rang
+  @register: RangBase.register
  
   constructor: (args...) ->
     super args...
@@ -26,7 +45,6 @@ class @RangCtrl extends @Rang
       continue unless typeof fn is 'function'
       continue if key in ['constructor', 'initialize'] or key[0] is '_'
       @s[key] = fn.bind?(@) || _.bind(fn, @)
- 
     @initialize?()
 
 class @ScopeCtrl extends @RangCtrl
@@ -36,21 +54,14 @@ class @ScopeCtrl extends @RangCtrl
 #  Service
 #
 #
-class @RangSrvc
-  @register: (app, name) ->
-    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
-    app.service name, @
- 
-  @inject: (args...) ->
-    @$inject = args
- 
-  constructor: (args...) ->
-    for key, index in @constructor.$inject
-      @[key] = args[index]
- 
-    @initialize?()
+class @RangSrv extends @Rang
+  @register: RangBase.register
 
-class @RestSrvc extends @RangSrvc
+  constructor: (args...) ->
+    super args...
+    @initialize?()
+ 
+class @RestSrv extends @RangSrv
   @inject 'Restangular'
 
   constructor: (args...) ->
