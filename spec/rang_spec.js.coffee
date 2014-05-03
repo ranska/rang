@@ -4,8 +4,8 @@ class @RangedCtrl extends @ScopeCtrl
   @register window.Bp
   scopedFunction: (arg) ->
     @s.scopedArg = arg
-@RangSrvc.conf.app = @Bp
-class @DefaultSrvc extends @RangSrvc
+@Rang.conf.app = @Bp
+class @DefaultSrv extends @RangSrv
   @register()
   scopedFunction: (arg) ->
     @s.scopedArg = arg
@@ -15,13 +15,13 @@ describe "register:\n", ->
     module 'specapp'
  
   describe 'actionService', ->
-    beforeEach inject (DefaultSrvc) ->
-      @DefaultSrvc = DefaultSrvc
+    beforeEach inject (DefaultSrv) ->
+      @DefaultSrv = DefaultSrv
 
     describe 'actionService', ->
 
       it 'return something', ->
-        expect(@DefaultSrvc isnt undefined).toBe true
+        expect(@DefaultSrv isnt undefined).toBe true
 
       
 describe "controller:\n", ->
@@ -47,7 +47,7 @@ describe "controller:\n", ->
       $scope.scopedFunction testedValue
       expect($scope.scopedArg).toBe testedValue
 
-class @RangedSrvc extends @RangSrvc
+class @RangedSrv extends @RangSrv
   @register window.Bp
   actionService: (arg) ->
     "service #{arg}"
@@ -56,10 +56,10 @@ describe "service:\n", ->
     module 'specapp'
  
   describe 'actionService', ->
-    beforeEach inject (RangedSrvc) ->
-      @RangedSrvc = RangedSrvc
+    beforeEach inject (RangedSrv) ->
+      @RangedSrv = RangedSrv
 
     describe 'actionService', ->
 
       it 'return something', ->
-        expect(@RangedSrvc.actionService 'demo' ).toBe 'service demo'
+        expect(@RangedSrv.actionService 'demo' ).toBe 'service demo'

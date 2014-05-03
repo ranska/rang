@@ -22,14 +22,19 @@ class @Rang
 #  Base is now used as mixin for shearing
 #  register between ctrl srv 
 #  but not drt (directive aren't register)
+#  TODO find a way to factorize the 2 first line
 #
 class RangBase
   @register: (app, name) ->
-    unless app?
-      app = @conf.app
+    app = @conf.app unless app?
     name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
-    app.service name, @
- 
+    #console.log name.match(/[A-Z]*[^A-Z]+/g)[-1..][0]
+    switch name.match(/[A-Z]*[^A-Z]+/g)[-1..][0]
+      when 'Ctrl'
+        app.controller name, @
+      when 'Srv'
+        app.service name, @
+
 class @RangCtrl extends @Rang
   @register: RangBase.register
  
@@ -49,14 +54,14 @@ class @ScopeCtrl extends @RangCtrl
 #  Service
 #
 #
-class @RangSrvc extends @Rang
+class @RangSrv extends @Rang
   @register: RangBase.register
 
   constructor: (args...) ->
     super args...
     @initialize?()
  
-class @RestSrvc extends @RangSrvc
+class @RestSrv extends @RangSrv
   @inject 'Restangular'
 
   constructor: (args...) ->
