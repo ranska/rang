@@ -40,7 +40,6 @@ class @RangCtrl extends @Rang
       continue unless typeof fn is 'function'
       continue if key in ['constructor', 'initialize'] or key[0] is '_'
       @s[key] = fn.bind?(@) || _.bind(fn, @)
- 
     @initialize?()
 
 class @ScopeCtrl extends @RangCtrl
@@ -52,6 +51,10 @@ class @ScopeCtrl extends @RangCtrl
 #
 class @RangSrvc extends @Rang
   @register: RangBase.register
+
+  constructor: (args...) ->
+    super args...
+    @initialize?()
  
 class @RestSrvc extends @RangSrvc
   @inject 'Restangular'
