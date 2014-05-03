@@ -11,9 +11,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'http://code.angularjs.org/1.1.4/angular.js',
-      'http://code.angularjs.org/1.1.4/angular-resource.js',
-      'http://code.angularjs.org/1.1.4/angular-mocks.js',
+      'components/angular.js',
+      //'http://code.angularjs.org/1.1.4/angular-resource.js',
+      'components/angular-mocks.js',
       'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.0/lodash.min.js',
       'rang.js.coffee',
       'spec/*.js.coffee'
