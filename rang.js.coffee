@@ -12,17 +12,26 @@ class @Rang
 
   @conf:
     app: null
-    app_name: 'rang_app'
  
   constructor: (args...) ->
     if @constructor.$inject?
       for key, index in @constructor.$inject
         @[key] = args[index]
+
+##
+#  Base is now used as mixin for shearing
+#  register between ctrl srv 
+#  but not drt (directive aren't register)
+#
+class RangBase
+  @register: (app, name) ->
+    unless app?
+      app = @conf.app
+    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
+    app.service name, @
  
 class @RangCtrl extends @Rang
-  @register: (app, name) ->
-    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
-    app.controller name, @
+  @register: RangBase.register
  
   constructor: (args...) ->
     super args...
@@ -41,28 +50,9 @@ class @ScopeCtrl extends @RangCtrl
 #  Service
 #
 #
-class @RangSrvc
-  @register: (app, name) ->
-    unless app?
-      app = @conf.app
-    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
-    app.service name, @
+class @RangSrvc extends @Rang
+  @register: RangBase.register
  
-  @inject: (args...) ->
-    @$inject = args
- 
-  constructor: (args...) ->
-    if @constructor.$inject?
-      for key, index in @constructor.$inject
-        @[key] = args[index]
- 
-    @initialize?()
-
-  @conf:
-    app: null
-    app_name: 'rang_'
-
-
 class @RestSrvc extends @RangSrvc
   @inject 'Restangular'
 
