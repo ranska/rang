@@ -1,4 +1,5 @@
 @Bp = angular.module( 'specapp', [])
+
 class @RangedCtrl extends @ScopeCtrl
   @register window.Bp
   scopedFunction: (arg) ->
