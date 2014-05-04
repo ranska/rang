@@ -66,3 +66,4 @@ describe "service:\n", ->
 
       it 'return something', ->
         expect(@RangedSrv.actionService 'demo' ).toBe 'service demo'
+

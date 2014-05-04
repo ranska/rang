@@ -70,18 +70,28 @@ class @RestSrv extends @RangSrv
 ##
 # Directive
 #
+class @RangDrt
+  @register: ->
+    #TODO dynamique name
+    window.Bp.directive "ehSimple", =>
+      @drt()
+
+##
+#  ONDO Directive with conf and controller
+#
 class @RangCtrlDrt extends @Rang
   @register: (app, name) ->
     name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
     drtName = name.match(/[A-Z]*[^A-Z]+/g)
     drtName = drtName[0...drtName.length-2].join ''
-    console.log drtName
+    #console.log drtName
+
     @conf.app.directive drtName, ->
       restrict:    "ACE"
       remplace:    true
       templateUrl: "/rang_templates/#{drtName}"
       scope:       false
-      controller:  this
+      #controller:  this
 
   constructor: (args...) ->
     super args...
