@@ -11,6 +11,60 @@ class @Mimo extends @RangDrt
       element.addClass "plain"
   @register()
 
+@['Dud'] = class
+
+hi = ->
+  'hi'
+  console.log @name
+  console.log @toString()
+Dud.hi = hi
+Dud.hi()
+
+###
+class @Buildera
+  hi: ->
+    console.log 'yes !!! '
+class @Builder
+  @new: =>
+    clazz = window['Titi'] = class
+    console.log window.Buildera::hi
+    clazz.hi = window.Buildera::hi
+    console.log clazz
+    clazz.hi()
+  @new()
+
+
+defer = (klass) ->
+  console.log 'startdefer'
+  console.log 'klass'
+  console.log klass
+  console.log window[klass]
+
+
+  if not window[klass]?
+    console.log 'defer'
+
+    do ->
+      window.setTimeout (defer klass), 0
+  else
+    window[klass].hi()
+
+
+console.log @Tut
+
+defer 'Tut'
+class @Tut
+  @hi: ->
+    console.log 'defered'
+    
+console.log 'after'
+console.log @Tut
+console.log window['Tut']
+  
+
+###
+
+
 ###
 describe "Directive:\n", ->
   beforeEach ->
