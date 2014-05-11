@@ -10,6 +10,9 @@ class @DefaultSrv extends @RangSrv
   scopedFunction: (arg) ->
     @s.scopedArg = arg
 
+class @RangedCtrlDrt extends @ScopeCtrlDrt
+  @register()
+
 describe "register:\n", ->
   beforeEach ->
     module 'specapp'
@@ -63,3 +66,4 @@ describe "service:\n", ->
 
       it 'return something', ->
         expect(@RangedSrv.actionService 'demo' ).toBe 'service demo'
+
