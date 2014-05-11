@@ -5,93 +5,27 @@ class @RangedCtrlDrt extends @RangCtrlDrt
   @register()
 
 
-class @Mimo extends @RangDrt
+class @JusteLeblancDrt extends @RangDrt
   @drt: ->
     (scope, element) ->
       element.addClass "plain"
   @register()
 
-@['Dud'] = class
-
-hi = ->
-  'hi'
-  console.log @name
-  console.log @toString()
-Dud.hi = hi
-Dud.hi()
-
-###
-class @Buildera
-  hi: ->
-    console.log 'yes !!! '
-class @Builder
-  @new: =>
-    clazz = window['Titi'] = class
-    console.log window.Buildera::hi
-    clazz.hi = window.Buildera::hi
-    console.log clazz
-    clazz.hi()
-  @new()
-
-
-defer = (klass) ->
-  console.log 'startdefer'
-  console.log 'klass'
-  console.log klass
-  console.log window[klass]
-
-
-  if not window[klass]?
-    console.log 'defer'
-
-    do ->
-      window.setTimeout (defer klass), 0
-  else
-    window[klass].hi()
-
-
-console.log @Tut
-
-defer 'Tut'
-class @Tut
-  @hi: ->
-    console.log 'defered'
-    
-console.log 'after'
-console.log @Tut
-console.log window['Tut']
-  
-
-###
-
-
-###
-describe "Directive:\n", ->
-  beforeEach ->
-    module 'specapp'
-  describe 'actionService', ->
-    beforeEach inject (RangedCtrlDrt) ->
-      @RangedCtrlDrt = RangedCtrlDrt
-
-    describe 'actionService', ->
-
-      it 'return something', ->
-        #expect(@RangedSrv.actionService 'demo' ).toBe 'service demo'
-###
-describe "Hello world", ->
+describe "Directive\n", ->
   element = undefined
   $scope = undefined
   beforeEach module("app")
-  beforeEach inject(($compile, $rootScope) ->
+  beforeEach inject ($compile, $rootScope) ->
     $scope = $rootScope
     element = angular
-      .element("<div eh-simple>{{2 + 2}}</div>")
+      .element "<div juste-leblanc>{{2 + 2}}</div>"
     $compile(element) $rootScope
-  )
+
   it "should equal 4", ->
     $scope.$digest()
     expect(element.html()).toBe "4"
 
-  describe "ehSimple", ->
+  describe "function directive by autoname", ->
+
     it "should add a class of plain", ->
       expect(element.hasClass("plain")).toBe true

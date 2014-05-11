@@ -73,7 +73,11 @@ class @RestSrv extends @RangSrv
 class @RangDrt
   @register: ->
     #TODO dynamique name
-    window.Bp.directive "ehSimple", =>
+    name = @name.split('Drt')[0]
+    start = name[0].toLowerCase()
+    name[0] = start
+    name = start + name.substr(1)
+    window.Bp.directive name, =>
       @drt()
 
 ##
