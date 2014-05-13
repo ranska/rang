@@ -16,8 +16,12 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "spec",
-    "test",
-    "tests"
+    "components",
+    "bower.json",
+    "README.md",
+    "LICENSE.txt",
+    "karma.conf.js",
+    "package.json",
+    "spec"
   ]
 }

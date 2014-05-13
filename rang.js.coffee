@@ -72,20 +72,21 @@ class @RestSrv extends @RangSrv
 #
 class @RangDrt
   @register: ->
-    #TODO dynamique name
-    name = @name.split('Drt')[0]
-    start = name[0].toLowerCase()
-    name[0] = start
-    name = start + name.substr(1)
-    window.Bp.directive name, =>
+    window.Bp.directive @toDrtName(), =>
       @drt()
+
+  @toDrtName: ->
+    # TODO or @toString
+    name  = @name.split('Drt')[0]
+    start = name[0].toLowerCase()
+    start + name.substr(1)
 
 ##
 #  ONDO Directive with conf and controller
 #
 class @RangCtrlDrt extends @Rang
   @register: (app, name) ->
-    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
+    name ?= @name or @toString().match(/function\s*(.*?)\(/)?[1]
     drtName = name.match(/[A-Z]*[^A-Z]+/g)
     drtName = drtName[0...drtName.length-2].join ''
     #console.log drtName
