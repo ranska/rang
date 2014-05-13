@@ -1,6 +1,9 @@
 {
   "name": "rang",
   "version": "0.2.0",
+  "dependencies": {
+    "ether": "~0.0.1"
+  },
   "homepage": "https://github.com/ranska/rang",
   "authors": [
     "Pierre-Alexandre Piarulli <go@rubyrock.me>"
