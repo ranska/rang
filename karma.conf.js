@@ -14,6 +14,7 @@ module.exports = function(config) {
       'components/angular.js',
       //'http://code.angularjs.org/1.1.4/angular-resource.js',
       'components/angular-mocks.js',
+      'bower_components/ether/ether.js.coffee',
       'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.0/lodash.min.js',
       'rang.js.coffee',
       'spec/*.js.coffee'
