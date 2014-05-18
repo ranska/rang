@@ -8,11 +8,7 @@ class @A.TotoCtrl extends @ScopeCtrl
 
 @Ether.nyx = @A
 res = @Ether.find finish_by: 'Ctrl'
-# verify has no methods
-# has no controller
-# add register
-# call it
-# verify is in controller app
+
 for klass, def of res
   @Ether.run_to_class klass, 'register'
 
@@ -38,3 +34,9 @@ describe "controller:\n", ->
       testedValue = "it's works baby"
       $scope.scopedFunction testedValue
       expect($scope.scopedArg).toBe testedValue
+
+  ##
+  # Rang.run
+  # Rang.conf
+  # les methodes de registration peuvent etre injecte par a.ether 
+  #   provieder par RangBase

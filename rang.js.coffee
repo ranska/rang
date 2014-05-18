@@ -110,5 +110,45 @@ class @RangCtrlDrt extends @Rang
 
 class @ScopeCtrlDrt extends @RangCtrlDrt
   @inject '$scope'
+
+
 ###
+# 
+#  directive spec
+#
+# 
 ###
+
+create_ctrl_drt: (conf, ctrl_name, methods) ->
+  # 1 ) creer une directive avec les conf par défault
+  # 2 ) les conf perso override les conf default
+  # 3 ) un controller default name est créé
+  # 4 ) l'initialisation est les méthodes lui sont injecté
+  # 5 ) la gestion du @s ou scope et prise en compte
+  # 6 ) le constructor recoit les ordres sécifique au 5..
+  # 7 ) la registration en tant que service s'effectue
+  # 1
+  conf_default =
+    restrict:    "ACE"
+    remplace:    true
+    templateUrl: "/rang_templates/#{drtName}"
+    scope:       false
+  # 2
+  drt_conf = merge_conf conf_default, conf
+  # 3
+  drt_ctrl = create_empty_crtl ctrl_name
+  # 4 
+  populate_ctrl drt_ctrl, methods
+  # 5
+  type_scope =  witch_scope drt_ctrl, drt_conf
+  # 6
+  mount_methods drt_ctrl, type_scope
+  #6.5 
+  #  3-6 only if no conf ctrl
+  #  then add self builded ctrl to conf
+  #
+  # 7
+  register_drt drt_conf
+
+
+
