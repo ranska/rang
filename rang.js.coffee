@@ -143,7 +143,7 @@ create_ctrl_drt: (conf, ctrl_name, methods) ->
   type_scope =  witch_scope drt_ctrl, drt_conf
   # 6
   mount_methods drt_ctrl, type_scope
-  #6.5 
+  # 6.5 
   #  3-6 only if no conf ctrl
   #  then add self builded ctrl to conf
   #
