@@ -18,7 +18,7 @@ describe "register:\n", ->
 
       it 'return something', ->
         expect(@DefaultSrv isnt undefined).toBe true
-      
+###      
 class @RangedSrv extends @RangSrv
   @register window.Bp
   actionService: (arg) ->
@@ -35,4 +35,4 @@ describe "service:\n", ->
 
       it 'return something', ->
         expect(@RangedSrv.actionService 'demo' ).toBe 'service demo'
-
+###

@@ -16,6 +16,7 @@ module.exports = function(config) {
       'components/angular-mocks.js',
       'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.0/lodash.min.js',
       'rang.js.coffee',
+      'rang_spec_helpers.js.coffee',
       'spec/*.js.coffee'
     ],
 
