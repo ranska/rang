@@ -12,6 +12,19 @@ class @Rang
 
   @conf:
     app: null
+
+  @init: ->
+    window.Ether.nyx = window.A
+    res              = window.Ether.find finish_by: 'Ctrl'
+    res2             = window.Ether.find finish_by: 'Srv'
+
+    for klass, def of res
+      window.Ether.run_to_class klass, 'register'
+    for klass, def of res2
+      window.Ether.run_to_class klass, 'register'
+
+
+
  
   constructor: (args...) ->
     if @constructor.$inject?
@@ -28,6 +41,7 @@ class RangBase
   @register: (app, name) ->
     app = @conf.app unless app?
     name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
+    console.log "in register #{app} #{name}"
     switch name.match(/[A-Z]*[^A-Z]+/g)[-1..][0]
       when 'Ctrl'
         app.controller name, @

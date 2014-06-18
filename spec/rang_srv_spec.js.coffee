@@ -1,10 +1,12 @@
 @Bp = angular.module( 'specapp', [])
 @Rang.conf.app = @Bp
 
-class @DefaultSrv extends @RangSrv
-  @register()
+class @A.DefaultSrv extends @RangSrv
+  #@register()
   scopedFunction: (arg) ->
     @s.scopedArg = arg
+
+@Rang.init()
 
 describe "register:\n", ->
   beforeEach ->

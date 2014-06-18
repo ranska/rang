@@ -6,11 +6,13 @@ class @A.TotoCtrl extends @ScopeCtrl
   scopedFunction: (arg) ->
     @s.scopedArg = arg
 
-@Ether.nyx = @A
-res = @Ether.find finish_by: 'Ctrl'
+@Rang.init()
+#@Ether.nyx = @A
+#res = @Ether.find finish_by: 'Ctrl'
 
-for klass, def of res
-  @Ether.run_to_class klass, 'register'
+#for klass, def of res
+#  console.log klass
+#  @Ether.run_to_class klass, 'register'
 
 describe "controller:\n", ->
   $scope = null
@@ -22,18 +24,25 @@ describe "controller:\n", ->
     $scope = _$rootScope_.$new()
     $rootScope = _$rootScope_.$new()
 
-    controller = $controller "A.TotoCtrl",
-      {$rootScope
-      $scope}
+    #controller = $controller "A.TotoCtrl"
+    #controller = $controller "A.TotoCtrl",
+    #  {$rootScope
+    #  $scope}
+    cont = window.A.TotoCtrl
+    console.log cont.$scope
+    console.log 'aui'
 
+    #console.log controller.$scope
   # TODO how can unit test register
 
   # TODO split in 2 test
   describe "scope extends and sugar syntax:\n", ->
     it 'should assign role in the $scope', ->
-      testedValue = "it's works baby"
-      $scope.scopedFunction testedValue
-      expect($scope.scopedArg).toBe testedValue
+      console.log  'nope'
+      4
+      #testedValue = "it's works baby"
+      #$scope.scopedFunction testedValue
+      #expect($scope.scopedArg).toBe testedValue
 
   ##
   # Rang.run
